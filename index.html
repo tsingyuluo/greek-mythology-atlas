@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>希腊神话志 · 中文互动知识库</title>
+  <meta name="description" content="中文希腊神话互动知识库：人物、故事、神谱、名画、原典与版本关联。" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" data-route="home" aria-label="返回首页">
+        <span class="brand-mark">Ω</span>
+        <span><strong>希腊神话志</strong><small>人物 · 故事 · 艺术 · 原典</small></span>
+      </button>
+      <nav class="topnav" aria-label="主导航">
+        <button data-route="stories">故事全集</button>
+        <button data-route="people">人物全集</button>
+        <button data-route="graph">神话世界</button>
+        <button data-route="art">名画中的神话</button>
+        <button data-route="sources">古典原典</button>
+        <button data-route="variants">版本比较</button>
+      </nav>
+      <div class="top-actions">
+        <label class="search-wrap">
+          <span aria-hidden="true">⌕</span>
+          <input id="globalSearch" placeholder="搜人物、故事、名画……" autocomplete="off" />
+        </label>
+        <button id="themeBtn" class="icon-btn" title="切换明暗">☾</button>
+      </div>
+    </header>
+
+    <main id="view" tabindex="-1"></main>
+
+    <footer class="footer">
+      <div><strong>希腊神话志</strong> · 中文互动知识库原型</div>
+      <div class="footer-links"><button data-route="sources">原典来源</button><button data-route="art">艺术关联</button><button data-route="about">关于数据</button></div>
+    </footer>
+  </div>
+
+  <div id="searchPanel" class="search-panel hidden" aria-live="polite"></div>
+  <div id="drawerBackdrop" class="backdrop hidden"></div>
+  <aside id="drawer" class="drawer" aria-label="详情面板"></aside>
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
