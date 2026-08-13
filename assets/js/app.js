@@ -1,4 +1,23 @@
 const DATA=window.GM_DATA;
+const STORY_CAST_EXPANSION={
+  'trojan-war':['menelaus','priam','andromache','briseis'],
+  'achilles-wrath':['priam','andromache','briseis'],
+  odyssey:['telemachus','circe','calypso','hermes'],
+  heracles:['eurystheus','deianira'],
+  perseus:['danae','hermes'],
+  oedipus:['tiresias'],
+  argonauts:['pelias','aeetes'],
+  'medea-tragedy':['aeetes','creon'],
+  'persephone-descent':['hecate','hermes']
+};
+const RELATION_EXPANSION={
+  helen:['menelaus','priam'],paris:['menelaus','priam'],agamemnon:['menelaus','briseis'],achilles:['briseis','priam','andromache'],hector:['priam','andromache'],patroclus:['briseis'],
+  odysseus:['telemachus','circe','calypso','hermes'],penelope:['telemachus'],athena:['telemachus'],
+  heracles:['eurystheus','deianira'],perseus:['danae','hermes'],oedipus:['tiresias'],jason:['pelias','aeetes'],medea:['aeetes','creon'],
+  demeter:['hecate'],hades:['hecate','hermes'],persephone:['hecate','hermes'],zeus:['hermes']
+};
+Object.entries(STORY_CAST_EXPANSION).forEach(([id,people])=>{const story=DATA.stories.find(x=>x.id===id);if(story)story.people=[...new Set([...story.people,...people])];});
+Object.entries(RELATION_EXPANSION).forEach(([id,people])=>{const person=DATA.people.find(x=>x.id===id);if(person)person.relations=[...new Set([...(person.relations||[]),...people])];});
 const view=document.getElementById('view');
 const searchInput=document.getElementById('globalSearch');
 const searchPanel=document.getElementById('searchPanel');
@@ -106,7 +125,7 @@ function renderHome(){
  <section class="hero">
    ${img('assets/images/hero_hd.webp')}
    <div class="hero-content"><div class="eyebrow">EXPLORE GREEK MYTHOLOGY</div><h1>进入一个可以不断追踪的<br>希腊神话世界</h1><p>从人物、故事、神谱、名画与古典原典之间来回穿梭。每个故事都拆成事件，每个事件都能回到人物关系与来源。</p><div class="hero-actions"><button class="btn-primary" data-route="stories">开始探索故事</button><button class="btn-secondary" data-route="graph">打开神话关系图</button></div></div>
-   <div class="hero-stats"><div class="stat"><strong>44</strong><span>原型人物</span></div><div class="stat"><strong>20</strong><span>完整故事线</span></div><div class="stat"><strong>6</strong><span>艺术专题</span></div></div>
+   <div class="hero-stats"><div class="stat"><strong>${DATA.people.length}</strong><span>原型人物</span></div><div class="stat"><strong>${DATA.stories.length}</strong><span>完整故事线</span></div><div class="stat"><strong>${DATA.artworks.length}</strong><span>艺术专题</span></div></div>
  </section>
  <section class="entry-grid"><button class="entry" data-route="people"><b>从一个人物开始</b><p>查看完整人物故事线、亲缘、敌友、参与事件、原典与艺术形象。</p></button><button class="entry" data-route="stories"><b>从一个故事开始</b><p>以章节与事件为主线阅读，再随时跳到人物、地点和相关故事。</p></button><button class="entry" data-route="art"><b>从一幅名画开始</b><p>识别画中人物与具体神话瞬间，再追踪画面背后的故事和古典来源。</p></button></section>
  <div class="section-title"><div><h2>热门故事</h2><p>不是孤立文章，而是可进入的叙事网络。</p></div><button class="link-btn" data-route="stories">查看全部 →</button></div>
